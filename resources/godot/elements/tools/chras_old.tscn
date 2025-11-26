@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://b57tpapdo5mma"]
+
+[ext_resource type="Texture2D" uid="uid://dcyga6867iv1i" path="res://resources/assets/objects/crash_32x32.png" id="1_vd811"]
+[ext_resource type="Script" uid="uid://kttqapa8ssou" path="res://states/elements/chras_old_state.gd" id="1_xvedl"]
+[ext_resource type="Texture2D" uid="uid://dkmsd7atlwjs3" path="res://resources/assets/objects/crash_normal_32x32.png" id="2_xvedl"]
+[ext_resource type="AudioStream" uid="uid://bsyde1fygh0jl" path="res://resources/assets/audio/efectos/llaves.mp3" id="4_go806"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f7mip"]
+diffuse_texture = ExtResource("1_vd811")
+normal_texture = ExtResource("2_xvedl")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ht0kj"]
+radius = 20.268568
+
+[node name="CrashOld" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_xvedl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_f7mip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ht0kj")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_go806")
+area_mask = 3
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

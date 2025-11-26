@@ -1,0 +1,3 @@
+extends InventaryBase
+
+class_name PlayerInventory

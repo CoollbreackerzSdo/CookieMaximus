@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://credqfqco74gm"]
+
+[ext_resource type="SpriteFrames" uid="uid://cdkad5mgy1cke" path="res://resources/godot/animations/enemy.tres" id="1_t0rnh"]
+[ext_resource type="Script" uid="uid://c6y1mcdv1c7s" path="res://controls/entities/cookie_monsters_control.gd" id="1_wc0hb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wc0hb"]
+size = Vector2(29, 30)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wc0hb"]
+radius = 6.0
+height = 12.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 11
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_wc0hb")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+light_mask = 32
+visibility_layer = 32
+position = Vector2(0, 19)
+sprite_frames = ExtResource("1_t0rnh")
+offset = Vector2(0, -19)
+
+[node name="CollitionChar" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="CollitionChar"]
+position = Vector2(0.5, 4)
+shape = SubResource("RectangleShape2D_wc0hb")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 6)
+shape = SubResource("CapsuleShape2D_wc0hb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 30.0
+navigation_layers = 2
+debug_enabled = true
+
+[node name="AgentTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="PlayerFocus" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="CollitionChar" to="." method="_on_collition_char_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AgentTimer" to="." method="_on_agent_timer_timeout"]
+[connection signal="timeout" from="PlayerFocus" to="." method="_on_player_focus_timeout"]

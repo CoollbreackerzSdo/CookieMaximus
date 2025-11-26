@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://creqd5kpcxqj"]
+
+[ext_resource type="Script" uid="uid://dgagn75vw3yuu" path="res://states/elements/door_2d_state.gd" id="1_7l3an"]
+[ext_resource type="Texture2D" uid="uid://be1vhea38o6sg" path="res://resources/assets/objects/door_top_32x48.png" id="2_6s26u"]
+[ext_resource type="Texture2D" uid="uid://bt40knd8ewgk3" path="res://resources/assets/objects/door_top_normal_32x48.png" id="3_hqebj"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_b8rv4"]
+diffuse_texture = ExtResource("2_6s26u")
+normal_texture = ExtResource("3_hqebj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emude"]
+size = Vector2(27.959854, 41.694523)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6s26u"]
+polygon = PackedVector2Array(-14.089806, -18.325226, -14.089806, -18.325226, 14.033554, -18.325226, 14.033554, -18.325226, 14.033554, -15.872606, -13.926296, -15.872606)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_7l3an")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0.1353836, 19.118088)
+texture = SubResource("CanvasTexture_b8rv4")
+offset = Vector2(-0.1353836, -19.118088)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.077316284, 3.2581515)
+shape = SubResource("RectangleShape2D_emude")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-24.363518, -30.021873, 48.074142, 65.48448)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_6s26u")
+occluder_light_mask = 2

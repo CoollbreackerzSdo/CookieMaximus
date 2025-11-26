@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bly0gmj6cusk3"]
+
+[ext_resource type="Texture2D" uid="uid://dabauh425u0pt" path="res://resources/assets/objects/photo_floors_32x48.png" id="1_ch4ir"]
+[ext_resource type="Texture2D" uid="uid://xjnhtl8gq41n" path="res://resources/assets/objects/photo_floors_normal_32x48.png" id="2_j3t5q"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6im26"]
+diffuse_texture = ExtResource("1_ch4ir")
+normal_texture = ExtResource("2_j3t5q")
+
+[node name="PhotoFloor" type="Sprite2D"]
+texture = SubResource("CanvasTexture_6im26")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-28.525452, -33.741352, 59.928635, 57.590473)

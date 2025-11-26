@@ -1,0 +1,188 @@
+[gd_scene load_steps=15 format=3 uid="uid://cfb1lma5kjwed"]
+
+[ext_resource type="Script" uid="uid://da4qnsodr1nrl" path="res://controls/ui/game_basic_menu_control.gd" id="1_hdg35"]
+[ext_resource type="Texture2D" uid="uid://cbfniw4tjnu3e" path="res://resources/assets/ui/containers/mid_box_48x32.png" id="2_vpmci"]
+[ext_resource type="Texture2D" uid="uid://c4bf5vnn8w5bp" path="res://resources/assets/ui/elements/buttoms/gear_option_16x16.png" id="2_yej3t"]
+[ext_resource type="Texture2D" uid="uid://cu56m87qhm4sh" path="res://resources/assets/ui/elements/buttoms/gear_option_hover_16x16.png" id="3_471ej"]
+[ext_resource type="FontFile" uid="uid://dawqf7h1tt8t4" path="res://resources/fonts/PixelifySans-Medium.ttf" id="3_jv0mn"]
+[ext_resource type="Texture2D" uid="uid://cgmuo7uup5ki5" path="res://resources/assets/ui/containers/p_info_base_112x48.png" id="4_471ej"]
+[ext_resource type="Texture2D" uid="uid://bcamww8c7g73u" path="res://resources/assets/ui/elements/healt_bard_55x4.png" id="5_8nbkp"]
+[ext_resource type="Texture2D" uid="uid://chn4o1mns7050" path="res://resources/assets/ui/elements/food_bard_55x4.png" id="6_e385b"]
+[ext_resource type="Texture2D" uid="uid://dqiwypibmhk6p" path="res://resources/assets/ui/elements/estres_bard_55x4.png" id="7_q88e6"]
+[ext_resource type="Script" uid="uid://cstdvxqah70b3" path="res://states/elements/key_input_state.gd" id="10_q88e6"]
+[ext_resource type="AudioStream" uid="uid://u2rlnm63qhpi" path="res://resources/assets/audio/efectos/menu_ui.mp3" id="11_soxhf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8nbkp"]
+texture = ExtResource("4_471ej")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jv0mn"]
+texture = ExtResource("2_vpmci")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwthy"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="GameBasicMenu" type="CanvasLayer"]
+script = ExtResource("1_hdg35")
+
+[node name="Base" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Base"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.15300001
+offset_bottom = -0.080005646
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="Container" type="Control" parent="Base/Margin"]
+layout_mode = 2
+
+[node name="Pause" type="TextureButton" parent="Base/Margin/Container"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_yej3t")
+texture_pressed = ExtResource("3_471ej")
+stretch_mode = 5
+
+[node name="Info" type="Panel" parent="Base/Margin/Container"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = -7.0
+offset_bottom = 41.0
+grow_horizontal = 0
+pivot_offset = Vector2(112, 7)
+theme_override_styles/panel = SubResource("StyleBoxTexture_8nbkp")
+
+[node name="Healt" type="TextureProgressBar" parent="Base/Margin/Container/Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.47300002
+anchor_top = 0.25
+anchor_right = 0.96400005
+anchor_bottom = 0.333
+offset_left = 0.02399826
+offset_right = 0.03199768
+offset_bottom = 0.015999794
+value = 50.0
+texture_progress = ExtResource("5_8nbkp")
+
+[node name="Hungry" type="TextureProgressBar" parent="Base/Margin/Container/Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.47300002
+anchor_top = 0.45800003
+anchor_right = 0.96400005
+anchor_bottom = 0.54200006
+offset_left = 0.02399826
+offset_top = 0.01599884
+offset_right = 0.03199768
+offset_bottom = -0.016002655
+value = 50.0
+texture_progress = ExtResource("6_e385b")
+
+[node name="Stress" type="TextureProgressBar" parent="Base/Margin/Container/Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.47300002
+anchor_top = 0.66700006
+anchor_right = 0.96400005
+anchor_bottom = 0.75000006
+offset_left = 0.02399826
+offset_top = -0.016002655
+offset_right = 0.03199768
+value = 50.0
+texture_progress = ExtResource("7_q88e6")
+
+[node name="Panel" type="Panel" parent="Base"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 24.0
+offset_bottom = 28.0
+grow_horizontal = 2
+pivot_offset = Vector2(24, 4)
+theme_override_styles/panel = SubResource("StyleBoxTexture_jv0mn")
+
+[node name="TImeLabel" type="Label" parent="Base/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.5
+offset_right = 20.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_jv0mn")
+theme_override_font_sizes/font_size = 16
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="MarginBottom" type="MarginContainer" parent="Base"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.85600007
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.16003418
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Container" type="Control" parent="Base/MarginBottom"]
+layout_mode = 2
+
+[node name="Buttons" type="Panel" parent="Base/MarginBottom/Container"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -54.0
+offset_right = 102.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qwthy")
+script = ExtResource("10_q88e6")
+
+[node name="W" type="Sprite2D" parent="Base/MarginBottom/Container/Buttons"]
+position = Vector2(30, 22)
+
+[node name="A" type="Sprite2D" parent="Base/MarginBottom/Container/Buttons"]
+position = Vector2(10, 39)
+
+[node name="D" type="Sprite2D" parent="Base/MarginBottom/Container/Buttons"]
+position = Vector2(50, 39)
+
+[node name="S" type="Sprite2D" parent="Base/MarginBottom/Container/Buttons"]
+position = Vector2(30, 39)
+
+[node name="Q" type="Sprite2D" parent="Base/MarginBottom/Container/Buttons"]
+position = Vector2(10, 22)
+
+[node name="Touch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_soxhf")
+
+[connection signal="pressed" from="Base/Margin/Container/Pause" to="." method="_on_pause_pressed"]

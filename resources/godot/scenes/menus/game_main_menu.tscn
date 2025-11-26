@@ -1,0 +1,224 @@
+[gd_scene load_steps=26 format=3 uid="uid://beoxkklhyrahg"]
+
+[ext_resource type="Script" uid="uid://cpat62ttb83cp" path="res://controls/ui/game_main_menu_control.gd" id="1_pkm0g"]
+[ext_resource type="Texture2D" uid="uid://dosefrbjdogu8" path="res://resources/assets/ui/parallax/parallax-demon-woods-bg.png" id="1_rtij8"]
+[ext_resource type="Texture2D" uid="uid://cxsbtlgr1x7tw" path="res://resources/assets/ui/parallax/parallax-demon-woods-far-trees.png" id="2_mrlod"]
+[ext_resource type="Texture2D" uid="uid://dnxn25dsgnpg" path="res://resources/assets/ui/parallax/parallax-demon-woods-mid-trees.png" id="3_4bqjm"]
+[ext_resource type="Texture2D" uid="uid://bo5q4xtqexpuv" path="res://resources/assets/ui/elements/buttoms/music_play_16x16.png" id="3_u86co"]
+[ext_resource type="Texture2D" uid="uid://cs1g0tmqglr1b" path="res://resources/assets/ui/parallax/parallax-demon-woods-close-trees.png" id="4_2s41n"]
+[ext_resource type="Texture2D" uid="uid://bneb0g2rsok86" path="res://resources/assets/ui/containers/menu_background_80x96.png" id="4_6fsm0"]
+[ext_resource type="Texture2D" uid="uid://bcecxmue5gu5p" path="res://resources/assets/ui/elements/buttoms/music_play_active_16x16.png" id="4_pkm0g"]
+[ext_resource type="Texture2D" uid="uid://drlnus0nijxqg" path="res://resources/assets/ui/elements/buttoms/music_play_hover_16x16.png" id="5_cw3wm"]
+[ext_resource type="Texture2D" uid="uid://bqv6o6vyl6nxd" path="res://resources/assets/ui/containers/vandal_big_hero_96x32.png" id="5_fn24o"]
+[ext_resource type="Texture2D" uid="uid://d2hqa111cm2ui" path="res://resources/assets/ui/elements/buttoms/play_button_46x16.png" id="5_plhr0"]
+[ext_resource type="Texture2D" uid="uid://cv8fj1l6m0kus" path="res://resources/assets/ui/elements/buttoms/play_button_active_46x16.png" id="6_mdxlv"]
+[ext_resource type="FontFile" uid="uid://bcmnx364u4d7b" path="res://resources/fonts/PixelifySans-SemiBold.ttf" id="6_rtij8"]
+[ext_resource type="Texture2D" uid="uid://cjgyg4hkqea23" path="res://resources/assets/ui/elements/buttoms/music_stop_16x16.png" id="7_4wl7r"]
+[ext_resource type="Script" uid="uid://h7745xhdxbcp" path="res://resources/godot/scenes/menus/music_activator.gd" id="7_d8ssa"]
+[ext_resource type="Texture2D" uid="uid://d36sl3610recn" path="res://resources/assets/ui/elements/buttoms/play_button_hover_46x16.png" id="7_k4n78"]
+[ext_resource type="AudioStream" uid="uid://do83hbbiekd6" path="res://resources/assets/audio/music/m1.mp3" id="7_mrlod"]
+[ext_resource type="AudioStream" uid="uid://bpy6wajco0ui3" path="res://resources/assets/audio/music/m2.mp3" id="8_4bqjm"]
+[ext_resource type="Texture2D" uid="uid://doba7t2mgkyu1" path="res://resources/assets/ui/elements/buttoms/music_stop_active_16x16.png" id="8_d8ssa"]
+[ext_resource type="Texture2D" uid="uid://cr44i58b7dhcl" path="res://resources/assets/ui/elements/buttoms/music_stop_hover_16x16.png" id="9_7lca8"]
+[ext_resource type="Script" uid="uid://dr0gqs6i7ok3i" path="res://resources/godot/scenes/menus/music_des_activator.gd" id="11_7lca8"]
+[ext_resource type="AudioStream" uid="uid://u2rlnm63qhpi" path="res://resources/assets/audio/efectos/menu_ui.mp3" id="22_mdxlv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rtij8"]
+texture = ExtResource("5_fn24o")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dsoue"]
+texture = ExtResource("4_6fsm0")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2s41n"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("7_mrlod")
+stream_1/stream = ExtResource("8_4bqjm")
+
+[node name="GameMain" type="Node2D"]
+script = ExtResource("1_pkm0g")
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleContainer" type="Panel" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.24700001
+anchor_right = 0.5
+anchor_bottom = 0.24700001
+offset_left = -48.0
+offset_top = -15.920006
+offset_right = 48.0
+offset_bottom = 16.079994
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(48, 16)
+theme_override_styles/panel = SubResource("StyleBoxTexture_rtij8")
+
+[node name="Label" type="Label" parent="Menu/Control/TitleContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.578
+anchor_right = 0.5
+anchor_bottom = 0.578
+offset_left = -48.5
+offset_top = -11.496
+offset_right = 48.5
+offset_bottom = 11.504
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(48.5, 11.5)
+theme_override_colors/font_color = Color(0.026721504, 0.026721502, 0.026721498, 1)
+theme_override_fonts/font = ExtResource("6_rtij8")
+theme_override_font_sizes/font_size = 16
+text = "Cookie Scrip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuContainer" type="Panel" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(40, 48)
+theme_override_styles/panel = SubResource("StyleBoxTexture_dsoue")
+
+[node name="TextureButton" type="TextureButton" parent="Menu/Control/MenuContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -8.0
+offset_right = 24.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 8)
+texture_normal = ExtResource("5_plhr0")
+texture_pressed = ExtResource("6_mdxlv")
+texture_hover = ExtResource("7_k4n78")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.708
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.11999512
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="Menu/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MusicActivator" type="TextureButton" parent="Menu/Control/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_right = 16.0
+grow_vertical = 0
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("3_u86co")
+texture_pressed = ExtResource("4_pkm0g")
+texture_hover = ExtResource("5_cw3wm")
+script = ExtResource("7_d8ssa")
+
+[node name="MusicDesActivator" type="TextureButton" parent="Menu/Control/MarginContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_right = 16.0
+grow_vertical = 0
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("7_4wl7r")
+texture_pressed = ExtResource("8_d8ssa")
+texture_hover = ExtResource("9_7lca8")
+script = ExtResource("11_7lca8")
+
+[node name="Parallax" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0, 0)
+scroll_offset = Vector2(4, 0)
+repeat_size = Vector2(480, 0)
+repeat_times = 3
+
+[node name="N1" type="Sprite2D" parent="Parallax/Parallax2D"]
+position = Vector2(321, 181)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_rtij8")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Parallax"]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-15, 0)
+repeat_times = 3
+
+[node name="N2" type="Sprite2D" parent="Parallax/Parallax2D2"]
+position = Vector2(321, 181)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_mrlod")
+
+[node name="Parallax2D3" type="Parallax2D" parent="Parallax"]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-25, 0)
+repeat_times = 3
+
+[node name="N3" type="Sprite2D" parent="Parallax/Parallax2D3"]
+position = Vector2(321, 181)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("3_4bqjm")
+
+[node name="Parallax2D4" type="Parallax2D" parent="Parallax"]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-35, 0)
+repeat_times = 3
+
+[node name="N4" type="Sprite2D" parent="Parallax/Parallax2D4"]
+position = Vector2(321, 181)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("4_2s41n")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_2s41n")
+autoplay = true
+attenuation = 1.5691676
+playback_type = 1
+
+[node name="Touch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_mdxlv")
+
+[connection signal="pressed" from="Menu/Control/MenuContainer/TextureButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/Control/MarginContainer/Control/MusicActivator" to="." method="_on_music_activator_pressed"]
+[connection signal="pressed" from="Menu/Control/MarginContainer/Control/MusicActivator" to="Menu/Control/MarginContainer/Control/MusicActivator" method="_on_pressed"]
+[connection signal="pressed" from="Menu/Control/MarginContainer/Control/MusicDesActivator" to="." method="_on_music_des_activator_pressed"]
+[connection signal="pressed" from="Menu/Control/MarginContainer/Control/MusicDesActivator" to="Menu/Control/MarginContainer/Control/MusicDesActivator" method="_on_pressed"]
