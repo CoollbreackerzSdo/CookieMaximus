@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjosmet2w4phd"]
+
+[sub_resource type="GDScript" id="GDScript_3mvjs"]
+script/source = "extends Sprite2D
+
+@export var texture_elenemt: Texture2D
+@export var nutrition: int
+
+func _enter_tree() -> void:
+	texture = texture_elenemt
+"
+
+[node name="Food" type="Sprite2D"]
+script = SubResource("GDScript_3mvjs")

@@ -13,11 +13,14 @@ var current_weapoins: int = 0
 var emotion_state: CookieMonsterState.EmoteStates = CookieMonsterState.EmoteStates.Calm
 var search_mode: CookieMonsterState.SearchMode = CookieMonsterState.SearchMode.Weapoint
 
+func _ready() -> void:
+	$AgentTimer.start()
+
 func _physics_process(_delta: float) -> void:
-	if search_mode == CookieMonsterState.SearchMode.Navigation && player != null:
-		_agentSearch()
-	elif search_mode == CookieMonsterState.SearchMode.Weapoint:
-		_WeapointSearch()
+	#if search_mode == CookieMonsterState.SearchMode.Navigation && player != null:
+	_agentSearch()
+	#elif search_mode == CookieMonsterState.SearchMode.Weapoint:
+		#_WeapointSearch()
 		
 	move_and_slide()
 
@@ -43,15 +46,14 @@ func _on_timer_timeout() -> void:
 
 func _on_collition_char_body_entered(body: Node2D) -> void:
 	if body is PlayerControl:
-		search_mode = CookieMonsterState.SearchMode.Navigation
-		$Timer.stop()
-		$AgentTimer.start()
-		$PlayerFocus.start()
+		#search_mode = CookieMonsterState.SearchMode.Navigation
+		#$Timer.stop()
+		#$PlayerFocus.start()
 		emit_signal("char_collition",damage)
 
 func _on_agent_timer_timeout() -> void:
 	agent.target_position = player.position
 
 func _on_player_focus_timeout() -> void:
-	search_mode = CookieMonsterState.SearchMode.Weapoint
+	#search_mode = CookieMonsterState.SearchMode.Weapoint
 	$AgentTimer.stop()

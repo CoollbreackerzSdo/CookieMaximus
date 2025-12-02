@@ -91,3 +91,6 @@ func update_status() -> void:
 		
 func _on_enemy_char_collition(damage: int) -> void:
 	player_detail.healt -= damage
+
+func add_tool_level(value: int):
+	crash_old_level += value

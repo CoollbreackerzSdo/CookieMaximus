@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6f34bctkdesa"]
+[gd_scene load_steps=8 format=3 uid="uid://c6f34bctkdesa"]
 
 [ext_resource type="Texture2D" uid="uid://b828h283xgihi" path="res://resources/assets/objects/door_32x16.png" id="1_70hos"]
 [ext_resource type="Script" uid="uid://d0rg6cq5o1h55" path="res://states/elements/door_state.gd" id="1_ismy1"]
 [ext_resource type="Texture2D" uid="uid://cl0ngo1bsa5qn" path="res://resources/assets/objects/door_normal_32x16.png" id="3_b23t1"]
+[ext_resource type="Texture2D" uid="uid://dyj01jyrbjos1" path="res://resources/assets/ui/elements/hosk_cursor_16x16.png" id="4_5qfcv"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_5qfcv"]
 diffuse_texture = ExtResource("1_70hos")
@@ -12,7 +13,7 @@ normal_texture = ExtResource("3_b23t1")
 size = Vector2(32, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b23t1"]
-size = Vector2(32, 15)
+size = Vector2(32, 37.25)
 
 [node name="Door" type="StaticBody2D"]
 collision_layer = 8
@@ -36,16 +37,22 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-position = Vector2(0, -16.5)
+position = Vector2(0, -27)
 shape = SubResource("RectangleShape2D_b23t1")
 
 [node name="Botton" type="Area2D" parent="."]
+position = Vector2(0, 8)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Botton"]
-position = Vector2(0, 6)
+position = Vector2(0, 9.375)
 shape = SubResource("RectangleShape2D_b23t1")
+
+[node name="Hosk" type="Sprite2D" parent="."]
+position = Vector2(10, -15)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_5qfcv")
 
 [connection signal="body_entered" from="Top" to="." method="_on_top_body_entered"]
 [connection signal="body_exited" from="Top" to="." method="_on_top_body_exited"]

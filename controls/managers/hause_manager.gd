@@ -11,9 +11,10 @@ func _ready() -> void:
 	enemy.player = player
 
 
-func _on_crash_old_chras_optain_signal() -> void:
-	player.crash_old_enable = true
-	player.crash_old_level+=1
+func _on_crash_old_chras_optain_signal(level: int) -> void:
+	if player.crash_old_enable == false:
+		player.crash_old_enable = true
+	player.add_tool_level(level)
 
 
 func enable_tools() -> void:
