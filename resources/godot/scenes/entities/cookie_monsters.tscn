@@ -11,6 +11,7 @@ radius = 6.0
 height = 12.0
 
 [node name="Enemy" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 11
 motion_mode = 1
@@ -22,6 +23,7 @@ light_mask = 32
 visibility_layer = 32
 position = Vector2(0, 19)
 sprite_frames = ExtResource("1_t0rnh")
+animation = &"rigth"
 offset = Vector2(0, -19)
 
 [node name="CollitionChar" type="Area2D" parent="."]
@@ -44,7 +46,6 @@ one_shot = true
 path_desired_distance = 30.0
 target_desired_distance = 15.0
 navigation_layers = 2
-debug_enabled = true
 
 [node name="AgentTimer" type="Timer" parent="."]
 wait_time = 0.3

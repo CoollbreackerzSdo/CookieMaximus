@@ -3,15 +3,12 @@ extends CharacterBody2D
 class_name CookieMonsterControl
 
 signal char_collition(damage:int)
-@export var weapoins: Array[Marker2D]
 @export var speed: float
 @export var min_distance: float = 5.0
 @export var damage: int
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
+@onready var animations: AnimatedSprite2D = $Sprite
 var player: PlayerControl
-var current_weapoins: int = 0
-var emotion_state: CookieMonsterState.EmoteStates = CookieMonsterState.EmoteStates.Calm
-var search_mode: CookieMonsterState.SearchMode = CookieMonsterState.SearchMode.Weapoint
 
 func _ready() -> void:
 	$AgentTimer.start()
@@ -27,19 +24,7 @@ func _physics_process(_delta: float) -> void:
 func  _agentSearch() -> void:
 	var direction = to_local(agent.get_next_path_position()).normalized()
 	velocity = direction * speed
-
-func _WeapointSearch() -> void:
-	var weapoins_position: = weapoins[current_weapoins].global_position
-	var direction = weapoins_position - global_position
-	var current_distance = direction.length()
-	direction = direction.normalized()
-	velocity = direction * speed
-	if current_distance < min_distance:
-		current_weapoins+=1
-		velocity = Vector2.ZERO
-		$Timer.start()
-		if current_weapoins >= weapoins.size():
-			current_weapoins = 0
+	animated_move(velocity)
 
 func _on_timer_timeout() -> void:
 	$Timer.stop()
@@ -57,3 +42,31 @@ func _on_agent_timer_timeout() -> void:
 func _on_player_focus_timeout() -> void:
 	#search_mode = CookieMonsterState.SearchMode.Weapoint
 	$AgentTimer.stop()
+
+func animated_move(axis:Vector2) -> void:
+	if axis == Vector2.ZERO:
+		return
+	if axis.y < 0 && axis.x > 0:
+		animations.play("up_rigth")
+		return
+	if axis.y < 0 && axis.x < 0:
+		animations.play("up_left")
+		return
+	if axis.y > 0 && axis.x > 0:
+		animations.play("down_rigth")
+		return
+	if axis.y > 0 && axis.x < 0:
+		animations.play("down_left")
+		return
+	if axis.y < 0:
+		animations.play("up")
+		return
+	if axis.y > 0:
+		animations.play("down")
+		return
+	if axis.x < 0:
+		animations.play("left")
+		return
+	if axis.x > 0:
+		animations.play("rigth")
+		return
