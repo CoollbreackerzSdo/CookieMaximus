@@ -15,7 +15,7 @@ func _on_crash_old_chras_optain_signal(level: int) -> void:
 	if player.crash_old_enable == false:
 		player.crash_old_enable = true
 	player.add_tool_level(level)
-	if player.crash_old_level > 5:
+	if player.crash_old_level >= 4:
 		$Enemy.is_active = true
 
 
@@ -53,3 +53,16 @@ func _on_smook_area_body_exited(body: Node2D) -> void:
 	if body is PlayerControl:
 		$Player/PointLight2D.texture_scale = 0.7
 		$Player/PointLight2D.height = 100
+
+
+func _on_zone_1_body_entered(body: Node2D) -> void:
+	if body is PlayerControl:
+		body.is_secure_zone = true
+		$Enemy.is_active = false
+		$Enemy.position = $Enemy.tps[randi_range(0,3)].position
+
+
+func _on_zone_1_body_exited(body: Node2D) -> void:
+	if body is PlayerControl:
+		body.is_secure_zone = false
+		$Enemy.is_active = true

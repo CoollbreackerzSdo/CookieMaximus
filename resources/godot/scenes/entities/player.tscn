@@ -277,3 +277,13 @@ stream = ExtResource("3_470yq")
 attenuation = 1.1892065
 bus = &"Sfx"
 area_mask = 3
+
+[node name="Stress" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Hungry" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Stress" to="." method="_on_stress_timeout"]
+[connection signal="timeout" from="Hungry" to="." method="_on_hungry_timeout"]

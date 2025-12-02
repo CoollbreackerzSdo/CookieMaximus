@@ -94,3 +94,23 @@ func _on_enemy_char_collition(damage: int) -> void:
 
 func add_tool_level(value: int):
 	crash_old_level += value
+
+
+func _on_area_2d_2_collition_body(value: int) -> void:
+	player_detail.hungry-=value
+
+
+func _on_hungry_timeout() -> void:
+	player_detail.hungry += hungry_increase
+	if player_detail.hungry >= 100:
+		player_detail.hungry = 0
+		player_detail.healt -= 10
+
+
+func _on_stress_timeout() -> void:
+	if is_secure_zone:
+		return
+	player_detail.stress += stress_increase
+	if player_detail.stress >= 100:
+		player_detail.stress = 0
+		player_detail.healt -= 20
