@@ -8,12 +8,15 @@ signal char_collition(damage:int)
 @export var damage: int
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animations: AnimatedSprite2D = $Sprite
+var is_active: bool = false
 var player: PlayerControl
 
 func _ready() -> void:
 	$AgentTimer.start()
 
 func _physics_process(_delta: float) -> void:
+	if !is_active:
+		return
 	#if search_mode == CookieMonsterState.SearchMode.Navigation && player != null:
 	_agentSearch()
 	#elif search_mode == CookieMonsterState.SearchMode.Weapoint:

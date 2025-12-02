@@ -1,14 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjosmet2w4phd"]
+[gd_scene load_steps=3 format=3 uid="uid://cjosmet2w4phd"]
 
 [sub_resource type="GDScript" id="GDScript_3mvjs"]
-script/source = "extends Sprite2D
+script/source = "extends Area2D
 
-@export var texture_elenemt: Texture2D
-@export var nutrition: int
+signal collition_body(value:int)
+@export var texture: Texture2D
+@export var value: int
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$Sprite2D.texture = texture
 
-func _enter_tree() -> void:
-	texture = texture_elenemt
+func _on_body_entered(body: Node2D) -> void:
+	if body is PlayerControl:
+		emit_signal(\"collition_body\",value)
+		queue_free()
 "
 
-[node name="Food" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mvjs"]
+
+[node name="Area2D2" type="Area2D"]
 script = SubResource("GDScript_3mvjs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3mvjs")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

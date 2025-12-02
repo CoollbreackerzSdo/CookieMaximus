@@ -15,6 +15,8 @@ func _on_crash_old_chras_optain_signal(level: int) -> void:
 	if player.crash_old_enable == false:
 		player.crash_old_enable = true
 	player.add_tool_level(level)
+	if player.crash_old_level > 5:
+		$Enemy.is_active = true
 
 
 func enable_tools() -> void:
