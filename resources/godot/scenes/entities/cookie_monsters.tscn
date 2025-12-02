@@ -22,6 +22,7 @@ script = ExtResource("1_wc0hb")
 light_mask = 32
 visibility_layer = 32
 position = Vector2(0, 19)
+scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("1_t0rnh")
 animation = &"rigth"
 offset = Vector2(0, -19)

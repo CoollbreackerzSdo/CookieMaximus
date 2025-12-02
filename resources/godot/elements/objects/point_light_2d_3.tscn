@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://xw7tdfwfxhqi"]
+
+[ext_resource type="Texture2D" uid="uid://c6rn1y1unwhnx" path="res://resources/assets/materials/shaders/light.png" id="1_wc6xg"]
+
+[sub_resource type="GDScript" id="GDScript_wc6xg"]
+script/source = "extends PointLight2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	enabled = true
+"
+
+[node name="PointLight2D3" type="PointLight2D"]
+enabled = false
+color = Color(0.36226544, 0.19207647, 0.11176927, 1)
+energy = 2.58
+range_item_cull_mask = 135
+shadow_enabled = true
+shadow_item_cull_mask = 7
+texture = ExtResource("1_wc6xg")
+texture_scale = 0.7
+height = 50.0
+script = SubResource("GDScript_wc6xg")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-26, -30, 53, 56)
