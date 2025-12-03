@@ -4,7 +4,7 @@
 script/source = "extends Area2D
 
 signal collition_body(value:int)
-@export var texture: Texture2D
+@export var texture: CompressedTexture2D
 @export var value: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,10 +19,14 @@ func _on_body_entered(body: Node2D) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3mvjs"]
 
 [node name="Area2D2" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
 script = SubResource("GDScript_3mvjs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 128
 visibility_layer = 128
+z_index = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3mvjs")

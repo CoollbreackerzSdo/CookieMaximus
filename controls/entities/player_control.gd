@@ -11,6 +11,7 @@ signal dead_signal
 var crash_old_enable: bool = false
 var crash_old_level: int = 0
 var is_pause: bool = false
+var is_dead: bool = false
 var is_secure_zone: bool = false
 var player_detail: PlayerDetail
 
@@ -18,7 +19,11 @@ func _enter_tree() -> void:
 	player_detail = PlayerDetail.create(100)
 
 func _physics_process(_delta: float) -> void:
-	if is_pause: return 
+	if is_pause || is_dead: return
+	if player_detail.healt <= 0:
+		is_dead = true
+		emit_signal("dead_signal")
+		return 
 	update_status()
 	var axis = get_move()
 	velocity = axis * speed 
@@ -97,7 +102,8 @@ func add_tool_level(value: int):
 
 
 func _on_area_2d_2_collition_body(value: int) -> void:
-	player_detail.hungry-=value
+	player_detail.hungry -= value * 2
+	player_detail.healt += value
 
 
 func _on_hungry_timeout() -> void:
@@ -114,3 +120,11 @@ func _on_stress_timeout() -> void:
 	if player_detail.stress >= 100:
 		player_detail.stress = 0
 		player_detail.healt -= 20
+
+
+func _on_area_2d_4_collition_body(value: int) -> void:
+	pass # Replace with function body.
+
+
+func _on_area_2d_6_collition_body(value: int) -> void:
+	pass # Replace with function body.

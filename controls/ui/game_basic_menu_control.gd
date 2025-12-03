@@ -13,6 +13,8 @@ signal pause_signal
 var player_info: PlayerDetail
 var curren_time = 0
 var is_pause:= false
+var current_s: int
+var current_m: int 
 
 func _ready() -> void:
 	control.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -31,7 +33,9 @@ func _process(delta: float) -> void:
 
 func get_time(format: int) -> String:
 	var minutos = int(curren_time) / 60
+	current_m = minutos
 	var segundos = int(curren_time) % 60
+	current_s = segundos
 	if format == 0:
 		return str(minutos).pad_zeros(2) + ":" + str(segundos).pad_zeros(2)
 	else:

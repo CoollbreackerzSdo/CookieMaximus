@@ -66,3 +66,14 @@ func _on_zone_1_body_exited(body: Node2D) -> void:
 	if body is PlayerControl:
 		body.is_secure_zone = false
 		$Enemy.is_active = true
+
+
+func _on_wining_body_entered(body: Node2D) -> void:
+	if body is PlayerControl:
+		pass
+	pass
+
+
+func _on_player_dead_signal() -> void:
+	$"Dead Menu".game_time = str($GameBasicMenu.current_m) + "m:" +  str($GameBasicMenu.current_s) + "s"
+	$"Dead Menu".visible = true

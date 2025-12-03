@@ -1,3 +1,285 @@
-[gd_scene format=3 uid="uid://77p6my003eoi"]
+[gd_scene load_steps=25 format=3 uid="uid://77p6my003eoi"]
+
+[ext_resource type="Texture2D" uid="uid://dimpqmvonantr" path="res://resources/assets/ui/containers/flag_box_container_160x48.png" id="1_a8fce"]
+[ext_resource type="Texture2D" uid="uid://bqv6o6vyl6nxd" path="res://resources/assets/ui/containers/vandal_big_hero_96x32.png" id="2_bxtjb"]
+[ext_resource type="Texture2D" uid="uid://bieevwve58pj6" path="res://resources/assets/ui/elements/buttoms/resert_buttom_16x16.png" id="3_sqfbv"]
+[ext_resource type="Texture2D" uid="uid://c7veqeidsod4r" path="res://resources/assets/ui/elements/buttoms/resert_buttom_click_16x16.png" id="4_wo640"]
+[ext_resource type="Texture2D" uid="uid://c6532pw3smski" path="res://resources/assets/ui/elements/buttoms/resert_buttom_hover_16x16.png" id="5_1wh0v"]
+[ext_resource type="Texture2D" uid="uid://cgeqnyyx0lkp6" path="res://resources/assets/ui/elements/buttoms/home_buttom_16x16.png" id="6_mwrip"]
+[ext_resource type="Texture2D" uid="uid://dx1a4dnsmb7ik" path="res://resources/assets/ui/elements/buttoms/home_buttom_active_16x16.png" id="7_w61nm"]
+[ext_resource type="Texture2D" uid="uid://byg4rglt0gddg" path="res://resources/assets/ui/elements/buttoms/home_buttom_hover_16x16.png" id="8_efd15"]
+[ext_resource type="Texture2D" uid="uid://d3mcfm66rivcj" path="res://resources/assets/ui/elements/buttoms/efects_16x16.png" id="9_xddvj"]
+[ext_resource type="Texture2D" uid="uid://ca1vcekifiyud" path="res://resources/assets/ui/elements/buttoms/efects_active_16x16.png" id="10_5rs7u"]
+[ext_resource type="Texture2D" uid="uid://bblrbu2qnlvyr" path="res://resources/assets/ui/elements/buttoms/efects_hover_16x16.png" id="11_sc4k0"]
+[ext_resource type="Texture2D" uid="uid://bo5q4xtqexpuv" path="res://resources/assets/ui/elements/buttoms/music_play_16x16.png" id="12_2j4n8"]
+[ext_resource type="Texture2D" uid="uid://bcecxmue5gu5p" path="res://resources/assets/ui/elements/buttoms/music_play_active_16x16.png" id="13_hef7g"]
+[ext_resource type="Texture2D" uid="uid://drlnus0nijxqg" path="res://resources/assets/ui/elements/buttoms/music_play_hover_16x16.png" id="14_n6krc"]
+[ext_resource type="Texture2D" uid="uid://d0trocouvgi6h" path="res://resources/assets/ui/elements/buttoms/efects_disable_16x16.png" id="15_fjuve"]
+[ext_resource type="Texture2D" uid="uid://d14uighxu13i5" path="res://resources/assets/ui/elements/buttoms/efects_disable_active_16x16.png" id="16_d5wtn"]
+[ext_resource type="Texture2D" uid="uid://xi1i6t5jtpyh" path="res://resources/assets/ui/elements/buttoms/efects_disable_hover_16x16.png" id="17_x0xhh"]
+[ext_resource type="Texture2D" uid="uid://cjgyg4hkqea23" path="res://resources/assets/ui/elements/buttoms/music_stop_16x16.png" id="18_gymkr"]
+[ext_resource type="Texture2D" uid="uid://doba7t2mgkyu1" path="res://resources/assets/ui/elements/buttoms/music_stop_active_16x16.png" id="19_id8yx"]
+[ext_resource type="Texture2D" uid="uid://cr44i58b7dhcl" path="res://resources/assets/ui/elements/buttoms/music_stop_hover_16x16.png" id="20_qjt0r"]
+[ext_resource type="AudioStream" uid="uid://u2rlnm63qhpi" path="res://resources/assets/audio/efectos/menu_ui.mp3" id="21_wo640"]
+
+[sub_resource type="GDScript" id="GDScript_tyd2c"]
+script/source = "extends CanvasLayer
+
+class_name DeadMenu
+
+signal go_to_signal(valie:String)
+signal restart_signal
+var game_time: String = \"\"
+
+func _ready() -> void:
+	visible = false
+	if !GameManu.is_music_enable:
+		$Control/Panel3/M.visible = false
+		$Control/Panel3/MD.visible = true
+	else:
+		$Control/Panel3/MD.visible = false
+		$Control/Panel3/M.visible = true
+	if !GameManu.is_effect_enable:
+		$Control/Panel3/E.visible = false
+		$Control/Panel3/ED.visible = true
+	else:
+		$Control/Panel3/ED.visible = false
+		$Control/Panel3/E.visible = true
+
+func _process(_delta: float) -> void:
+	$Control/TIme.text = game_time
+
+func _on_r_pressed() -> void:
+	if GameManu.is_effect_enable:
+		$Touch.play()
+		await $Touch.finished
+		emit_signal(\"restart_signal\")
+		return
+	emit_signal(\"restart_signal\")
+
+
+func _on_md_pressed() -> void:
+	$Touch.play()
+	await $Touch.finished
+	$Control/Panel3/MD.visible = false
+	$Control/Panel3/M.visible = true
+
+
+func _on_ed_pressed() -> void:
+	$Touch.play()
+	await $Touch.finished
+	$Control/Panel3/ED.visible = false
+	$Control/Panel3/E.visible = true
+	GameManu.is_effect_enable = true
+
+
+func _on_h_pressed() -> void:
+	if GameManu.is_effect_enable:
+		$Touch.play()
+		await $Touch.finished
+		emit_signal(\"go_to_signal\",\"route\")
+		return 
+	emit_signal(\"go_to_signal\",\"route\")
+
+
+func _on_e_pressed() -> void:
+	$Touch.play()
+	await $Touch.finished
+	$Control/Panel3/E.visible = false
+	$Control/Panel3/ED.visible = true
+	GameManu.is_effect_enable = false
+
+
+func _on_m_pressed() -> void:
+	$Touch.play()
+	await $Touch.finished
+	$Control/Panel3/M.visible = false
+	$Control/Panel3/MD.visible = true
+"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ogosr"]
+texture = ExtResource("2_bxtjb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yi28b"]
+texture = ExtResource("1_a8fce")
 
 [node name="Dead Menu" type="CanvasLayer"]
+script = SubResource("GDScript_tyd2c")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = 93.0
+offset_right = 50.0
+offset_bottom = 125.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(48, 16)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ogosr")
+
+[node name="Label" type="Label" parent="Control/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -5.5
+offset_right = 59.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+text = "Game Over"
+
+[node name="Panel3" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.53300005
+anchor_right = 0.5
+anchor_bottom = 0.66700006
+offset_left = -80.0
+offset_top = 0.11997986
+offset_right = 80.0
+offset_bottom = -0.120025635
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(80, 24)
+theme_override_styles/panel = SubResource("StyleBoxTexture_yi28b")
+
+[node name="R" type="TextureButton" parent="Control/Panel3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.14400001
+anchor_top = 0.5
+anchor_right = 0.24400002
+anchor_bottom = 0.5
+offset_left = -0.040000916
+offset_top = -8.0
+offset_right = -0.040000916
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("3_sqfbv")
+texture_pressed = ExtResource("4_wo640")
+texture_hover = ExtResource("5_1wh0v")
+
+[node name="H" type="TextureButton" parent="Control/Panel3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75000006
+anchor_top = 0.5
+anchor_right = 0.85
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("6_mwrip")
+texture_pressed = ExtResource("7_w61nm")
+texture_hover = ExtResource("8_efd15")
+
+[node name="E" type="TextureButton" parent="Control/Panel3"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 32.0
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("9_xddvj")
+texture_pressed = ExtResource("10_5rs7u")
+texture_hover = ExtResource("11_sc4k0")
+
+[node name="M" type="TextureButton" parent="Control/Panel3"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 32.0
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("12_2j4n8")
+texture_pressed = ExtResource("13_hef7g")
+texture_hover = ExtResource("14_n6krc")
+
+[node name="ED" type="TextureButton" parent="Control/Panel3"]
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 32.0
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("15_fjuve")
+texture_pressed = ExtResource("16_d5wtn")
+texture_hover = ExtResource("17_x0xhh")
+
+[node name="MD" type="TextureButton" parent="Control/Panel3"]
+visible = false
+layout_mode = 0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 32.0
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("18_gymkr")
+texture_pressed = ExtResource("19_id8yx")
+texture_hover = ExtResource("20_qjt0r")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -37.0
+offset_right = 44.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TIme" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -12.0
+offset_right = 44.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "20m:29s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Touch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_wo640")
+
+[connection signal="pressed" from="Control/Panel3/R" to="." method="_on_r_pressed"]
+[connection signal="pressed" from="Control/Panel3/H" to="." method="_on_h_pressed"]
+[connection signal="pressed" from="Control/Panel3/E" to="." method="_on_e_pressed"]
+[connection signal="pressed" from="Control/Panel3/M" to="." method="_on_m_pressed"]
+[connection signal="pressed" from="Control/Panel3/ED" to="." method="_on_ed_pressed"]
+[connection signal="pressed" from="Control/Panel3/MD" to="." method="_on_md_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c31rbgkvq0f2y"]
+[gd_scene load_steps=35 format=4 uid="uid://c31rbgkvq0f2y"]
 
 [ext_resource type="Script" uid="uid://cxiira0d3uo3j" path="res://controls/managers/hause_manager.gd" id="1_sexe6"]
 [ext_resource type="Texture2D" uid="uid://c6rn1y1unwhnx" path="res://resources/assets/materials/shaders/light.png" id="2_pblqg"]
@@ -18,8 +18,14 @@
 [ext_resource type="PackedScene" uid="uid://credqfqco74gm" path="res://resources/godot/scenes/entities/cookie_monsters.tscn" id="11_nicko"]
 [ext_resource type="PackedScene" uid="uid://xw7tdfwfxhqi" path="res://resources/godot/elements/objects/point_light_2d_3.tscn" id="12_exlm3"]
 [ext_resource type="PackedScene" uid="uid://w3dd6f2rbh5y" path="res://resources/godot/elements/tools/char_old_cursor.tscn" id="16_sndj3"]
+[ext_resource type="PackedScene" uid="uid://77p6my003eoi" path="res://resources/godot/scenes/menus/dead_menu.tscn" id="17_f20do"]
 [ext_resource type="PackedScene" uid="uid://cjosmet2w4phd" path="res://resources/godot/elements/food/food.tscn" id="19_ftyef"]
 [ext_resource type="Texture2D" uid="uid://bs0eey3u01o2e" path="res://resources/assets/food/05_apple_pie.png" id="20_0icwa"]
+[ext_resource type="Texture2D" uid="uid://bfie76wiwuisy" path="res://resources/assets/food/87_ramen.png" id="21_2bg8f"]
+[ext_resource type="Texture2D" uid="uid://cvhslggiwnt8r" path="res://resources/assets/food/97_sushi.png" id="22_7ochs"]
+[ext_resource type="Texture2D" uid="uid://ckd1u7nsvb8j3" path="res://resources/assets/food/13_bacon.png" id="23_y41nf"]
+[ext_resource type="Texture2D" uid="uid://dst18ftc1xhsp" path="res://resources/assets/food/101_waffle.png" id="24_f20do"]
+[ext_resource type="Texture2D" uid="uid://bn246xkichfe1" path="res://resources/assets/food/18_burrito.png" id="25_hul6l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sndj3"]
 texture = ExtResource("4_gaqc7")
@@ -352,12 +358,14 @@ sources/3 = SubResource("TileSetAtlasSource_exlm3")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ftyef"]
 size = Vector2(246, 264)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y41nf"]
+size = Vector2(353, 161)
+
 [node name="Hause" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_sexe6")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.05356484, 0.028237948, 0, 1)
 
 [node name="Tilemap" type="Node2D" parent="."]
@@ -529,6 +537,8 @@ zoom = Vector2(1.2, 1.2)
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_e1r6g")]
 
+[node name="Dead Menu" parent="." instance=ExtResource("17_f20do")]
+
 [node name="Enemy" parent="." node_paths=PackedStringArray("tps") instance=ExtResource("11_nicko")]
 light_mask = 32
 visibility_layer = 32
@@ -548,6 +558,36 @@ z_index = 2
 position = Vector2(-137, 838)
 texture = ExtResource("20_0icwa")
 value = 10
+
+[node name="Area2D3" parent="Comida" instance=ExtResource("19_ftyef")]
+position = Vector2(-940, 614)
+texture = ExtResource("21_2bg8f")
+value = 1
+
+[node name="Area2D4" parent="Comida" instance=ExtResource("19_ftyef")]
+position = Vector2(-425, 430)
+texture = ExtResource("22_7ochs")
+value = 60
+
+[node name="Area2D5" parent="Comida" instance=ExtResource("19_ftyef")]
+position = Vector2(455, 509)
+texture = ExtResource("20_0icwa")
+value = 39
+
+[node name="Area2D6" parent="Comida" instance=ExtResource("19_ftyef")]
+position = Vector2(585, 335)
+texture = ExtResource("23_y41nf")
+value = 40
+
+[node name="Area2D7" parent="Comida" instance=ExtResource("19_ftyef")]
+position = Vector2(1289, 816)
+texture = ExtResource("24_f20do")
+value = 100
+
+[node name="Area2D8" parent="Comida" instance=ExtResource("19_ftyef")]
+position = Vector2(1531, 712)
+texture = ExtResource("25_hul6l")
+value = 30
 
 [node name="Secure Zones" type="Node2D" parent="."]
 
@@ -581,6 +621,14 @@ position = Vector2(628, 395)
 [node name="Marker2D5" type="Marker2D" parent="TP POINS"]
 position = Vector2(1453, 771)
 
+[node name="Wining" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="Wind" type="CollisionShape2D" parent="Wining"]
+position = Vector2(-944.5, 995.5)
+shape = SubResource("RectangleShape2D_y41nf")
+
 [connection signal="mause_entered" from="Tilemap/Doors_Dowm/Pincipius" to="." method="enable_tools"]
 [connection signal="mause_exited" from="Tilemap/Doors_Dowm/Pincipius" to="." method="disable_tools"]
 [connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril1" to="." method="enable_tools"]
@@ -608,15 +656,25 @@ position = Vector2(1453, 771)
 [connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld3" to="." method="_on_crash_old_chras_optain_signal"]
 [connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld4" to="." method="_on_crash_old_chras_optain_signal"]
 [connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld5" to="." method="_on_crash_old_chras_optain_signal"]
+[connection signal="dead_signal" from="Player" to="." method="_on_player_dead_signal"]
 [connection signal="pause_signal" from="GameBasicMenu" to="." method="pause_signal"]
 [connection signal="continue_signal" from="PauseMenu" to="." method="continue_signal"]
 [connection signal="go_to_signal" from="PauseMenu" to="." method="go_to_signal"]
 [connection signal="restart_signal" from="PauseMenu" to="." method="restart_signal"]
+[connection signal="go_to_signal" from="Dead Menu" to="." method="go_to_signal"]
+[connection signal="restart_signal" from="Dead Menu" to="." method="restart_signal"]
 [connection signal="char_collition" from="Enemy" to="Player" method="_on_enemy_char_collition"]
 [connection signal="collition_body" from="Comida/Area2D2" to="Player" method="_on_area_2d_2_collition_body"]
+[connection signal="collition_body" from="Comida/Area2D3" to="Player" method="_on_area_2d_2_collition_body"]
+[connection signal="collition_body" from="Comida/Area2D4" to="Player" method="_on_area_2d_4_collition_body"]
+[connection signal="collition_body" from="Comida/Area2D5" to="Player" method="_on_area_2d_2_collition_body"]
+[connection signal="collition_body" from="Comida/Area2D6" to="Player" method="_on_area_2d_6_collition_body"]
+[connection signal="collition_body" from="Comida/Area2D7" to="Player" method="_on_area_2d_2_collition_body"]
+[connection signal="collition_body" from="Comida/Area2D8" to="Player" method="_on_area_2d_2_collition_body"]
 [connection signal="body_entered" from="Secure Zones/Zone_1" to="." method="_on_zone_1_body_entered"]
 [connection signal="body_exited" from="Secure Zones/Zone_1" to="." method="_on_zone_1_body_exited"]
 [connection signal="body_entered" from="Secure Zones/Zone_2" to="." method="_on_zone_1_body_entered"]
 [connection signal="body_exited" from="Secure Zones/Zone_2" to="." method="_on_zone_1_body_exited"]
+[connection signal="body_entered" from="Wining" to="." method="_on_wining_body_entered"]
 
 [editable path="Player"]
