@@ -366,6 +366,7 @@ y_sort_enabled = true
 script = ExtResource("1_sexe6")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.05356484, 0.028237948, 0, 1)
 
 [node name="Tilemap" type="Node2D" parent="."]
@@ -545,7 +546,8 @@ visibility_layer = 32
 position = Vector2(1448, 625)
 speed = 120.0
 damage = 10
-tps = [NodePath("../TP POINS/Marker2D"), NodePath("../TP POINS/Marker2D5"), NodePath("../TP POINS/Marker2D3"), NodePath("../TP POINS/Marker2D4")]
+damage_ticks = 1.0
+tps = [NodePath("../TP POINS/Marker2D"), NodePath("../TP POINS/Marker2D4"), NodePath("../TP POINS/Marker2D3"), NodePath("../TP POINS/Marker2D5")]
 
 [node name="CharOldCursor" parent="." instance=ExtResource("16_sndj3")]
 light_mask = 128

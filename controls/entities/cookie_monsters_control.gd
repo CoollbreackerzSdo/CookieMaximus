@@ -4,8 +4,9 @@ class_name CookieMonsterControl
 
 signal char_collition(damage:int)
 @export var speed: float
-@export var min_distance: float = 5.0
+#@export var min_distance: float = 5.0
 @export var damage: int
+@export var damage_ticks: float
 @export var tps: Array[Marker2D]
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animations: AnimatedSprite2D = $Sprite
@@ -13,16 +14,13 @@ var is_active: bool = false
 var player: PlayerControl
 
 func _ready() -> void:
+	$DamageTimer.wait_time = damage_ticks
 	$AgentTimer.start()
 
 func _physics_process(_delta: float) -> void:
 	if is_active == false:
 		return
-	#if search_mode == CookieMonsterState.SearchMode.Navigation && player != null:
 	_agentSearch()
-	#elif search_mode == CookieMonsterState.SearchMode.Weapoint:
-		#_WeapointSearch()
-		
 	move_and_slide()
 
 func  _agentSearch() -> void:
@@ -30,22 +28,13 @@ func  _agentSearch() -> void:
 	velocity = direction * speed
 	animated_move(velocity)
 
-func _on_timer_timeout() -> void:
-	$Timer.stop()
-
 func _on_collition_char_body_entered(body: Node2D) -> void:
 	if body is PlayerControl:
-		#search_mode = CookieMonsterState.SearchMode.Navigation
-		#$Timer.stop()
-		#$PlayerFocus.start()
 		emit_signal("char_collition",damage)
+		$DamageTimer.start()
 
 func _on_agent_timer_timeout() -> void:
 	agent.target_position = player.position
-
-func _on_player_focus_timeout() -> void:
-	#search_mode = CookieMonsterState.SearchMode.Weapoint
-	$AgentTimer.stop()
 
 func animated_move(axis:Vector2) -> void:
 	if axis == Vector2.ZERO:
@@ -74,3 +63,11 @@ func animated_move(axis:Vector2) -> void:
 	if axis.x > 0:
 		animations.play("rigth")
 		return
+
+
+func _on_damage_timer_timeout() -> void:
+	emit_signal("char_collition",damage)
+
+
+func _on_collition_char_body_exited(body: Node2D) -> void:
+	$DamageTimer.stop()

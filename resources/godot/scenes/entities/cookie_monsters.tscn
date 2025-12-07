@@ -13,16 +13,15 @@ height = 12.0
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
-collision_mask = 11
+collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_wc0hb")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-light_mask = 32
+light_mask = 1023
 visibility_layer = 32
 position = Vector2(0, 19)
-scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("1_t0rnh")
 animation = &"rigth"
 offset = Vector2(0, -19)
@@ -39,9 +38,8 @@ shape = SubResource("RectangleShape2D_wc0hb")
 position = Vector2(-1, 6)
 shape = SubResource("CapsuleShape2D_wc0hb")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DamageTimer" type="Timer" parent="."]
 wait_time = 2.0
-one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 30.0
@@ -51,11 +49,7 @@ navigation_layers = 2
 [node name="AgentTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="PlayerFocus" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [connection signal="body_entered" from="CollitionChar" to="." method="_on_collition_char_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_exited" from="CollitionChar" to="." method="_on_collition_char_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="AgentTimer" to="." method="_on_agent_timer_timeout"]
-[connection signal="timeout" from="PlayerFocus" to="." method="_on_player_focus_timeout"]

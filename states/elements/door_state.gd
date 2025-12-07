@@ -21,7 +21,7 @@ func _on_top_body_entered(body: Node2D) -> void:
 		body_tool_level = body.crash_old_level
  
 func _input(event: InputEvent) -> void:
-	if body_tool_level >= tool_requeriment_levet && is_maouse_entered && is_body_entered && event is InputEventMouseButton:
+	if body_tool_level >= tool_requeriment_levet && is_body_entered:
 		emit_signal("mause_exited")
 		queue_free()
 

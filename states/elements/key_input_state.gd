@@ -14,8 +14,8 @@ var key_rigth_normal_hover_texture: Texture2D = load("res://resources/assets/ui/
 var key_left_normal_texture: Texture2D = load("res://resources/assets/ui/elements/keys/a_hover_13x14.png") 
 var key_left_normal_hover_texture: Texture2D = load("res://resources/assets/ui/elements/keys/a_13x14.png")
 
-var key_interactivity_normal_texture: Texture2D = load("res://resources/assets/ui/elements/keys/q_hover_13x14.png")
-var key_interactivity_normal_hover_texture: Texture2D = load("res://resources/assets/ui/elements/keys/q_14x14.png")
+#var key_interactivity_normal_texture: Texture2D = load("res://resources/assets/ui/elements/keys/q_hover_13x14.png")
+#var key_interactivity_normal_hover_texture: Texture2D = load("res://resources/assets/ui/elements/keys/q_14x14.png")
 
 @onready var w_key_sprite: Sprite2D = $W
 @onready var s_key_sprite: Sprite2D = $S
@@ -36,6 +36,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_left"):
 		a_key_sprite.texture = key_left_normal_texture
 	else: a_key_sprite.texture = key_left_normal_hover_texture   
-	if event.is_action_pressed("ui_interactive"):
-		q_key_sprite.texture = key_interactivity_normal_texture
-	else: q_key_sprite.texture = key_interactivity_normal_hover_texture
+	#if event.is_action_pressed("ui_interactive"):
+		#q_key_sprite.texture = key_interactivity_normal_texture
+	#else: q_key_sprite.texture = key_interactivity_normal_hover_texture
