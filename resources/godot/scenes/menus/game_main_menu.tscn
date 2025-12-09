@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://beoxkklhyrahg"]
+[gd_scene load_steps=24 format=3 uid="uid://beoxkklhyrahg"]
 
 [ext_resource type="Script" uid="uid://cpat62ttb83cp" path="res://controls/ui/game_main_menu_control.gd" id="1_pkm0g"]
 [ext_resource type="Texture2D" uid="uid://dosefrbjdogu8" path="res://resources/assets/ui/parallax/parallax-demon-woods-bg.png" id="1_rtij8"]
@@ -16,11 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://cjgyg4hkqea23" path="res://resources/assets/ui/elements/buttoms/music_stop_16x16.png" id="7_4wl7r"]
 [ext_resource type="Script" uid="uid://h7745xhdxbcp" path="res://resources/godot/scenes/menus/music_activator.gd" id="7_d8ssa"]
 [ext_resource type="Texture2D" uid="uid://d36sl3610recn" path="res://resources/assets/ui/elements/buttoms/play_button_hover_46x16.png" id="7_k4n78"]
-[ext_resource type="AudioStream" uid="uid://do83hbbiekd6" path="res://resources/assets/audio/music/m1.mp3" id="7_mrlod"]
-[ext_resource type="AudioStream" uid="uid://bpy6wajco0ui3" path="res://resources/assets/audio/music/m2.mp3" id="8_4bqjm"]
 [ext_resource type="Texture2D" uid="uid://doba7t2mgkyu1" path="res://resources/assets/ui/elements/buttoms/music_stop_active_16x16.png" id="8_d8ssa"]
 [ext_resource type="Texture2D" uid="uid://cr44i58b7dhcl" path="res://resources/assets/ui/elements/buttoms/music_stop_hover_16x16.png" id="9_7lca8"]
 [ext_resource type="Script" uid="uid://dr0gqs6i7ok3i" path="res://resources/godot/scenes/menus/music_des_activator.gd" id="11_7lca8"]
+[ext_resource type="AudioStream" uid="uid://cw61teq54kdjt" path="res://resources/assets/audio/music/music.mp3" id="20_plhr0"]
 [ext_resource type="AudioStream" uid="uid://u2rlnm63qhpi" path="res://resources/assets/audio/efectos/menu_ui.mp3" id="22_mdxlv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rtij8"]
@@ -28,12 +27,6 @@ texture = ExtResource("5_fn24o")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dsoue"]
 texture = ExtResource("4_6fsm0")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2s41n"]
-playback_mode = 2
-streams_count = 2
-stream_0/stream = ExtResource("7_mrlod")
-stream_1/stream = ExtResource("8_4bqjm")
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_pkm0g")
@@ -209,7 +202,8 @@ scale = Vector2(1.4, 1.4)
 texture = ExtResource("4_2s41n")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_2s41n")
+stream = ExtResource("20_plhr0")
+volume_db = 8.0
 autoplay = true
 attenuation = 1.5691676
 playback_type = 1

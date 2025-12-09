@@ -25,6 +25,7 @@ func  _enter_tree() -> void:
 
 func _process(delta: float) -> void:
 	if !is_pause:
+		$Base/Margin/Container/Trash/TrahCount.text = str(player_info.trash_count) + "/5"
 		curren_time += delta
 		heatl_bar.value = player_info.healt
 		stress_bar.value = player_info.stress

@@ -18,15 +18,6 @@ func _on_crash_old_chras_optain_signal(level: int) -> void:
 	if player.crash_old_level >= 4:
 		$Enemy.is_active = true
 
-
-func enable_tools() -> void:
-	if player.crash_old_enable:
-		$CharOldCursor.visible	= true
-
-func disable_tools() -> void:
-	if player.crash_old_enable:
-		$CharOldCursor.visible	= false
-
 func pause_signal() -> void:
 	$PauseMenu.visible = true
 	player.pause_event()
@@ -75,5 +66,6 @@ func _on_wining_body_entered(body: Node2D) -> void:
 
 
 func _on_player_dead_signal() -> void:
+	$Enemy.is_active = false
 	$"Dead Menu".game_time = str($GameBasicMenu.current_m) + "m:" +  str($GameBasicMenu.current_s) + "s"
 	$"Dead Menu".visible = true

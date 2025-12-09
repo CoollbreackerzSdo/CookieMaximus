@@ -3,6 +3,11 @@ extends CanvasLayer
 signal continue_signal
 signal go_to_signal(route: String)
 signal restart_signal
+signal disabke_effect
+signal disable_music
+signal enable_effect
+signal enable_music
+
 
 @export var route: String
 
@@ -56,6 +61,7 @@ func _on_effect_pressed() -> void:
 	$BlurEffect/Control/Panel/E.visible = false
 	$BlurEffect/Control/Panel/ED.visible = true
 	GameManu.is_effect_enable = false
+	emit_signal("disabke_effect")
 
 
 func _on_music_pressed() -> void:
@@ -63,6 +69,8 @@ func _on_music_pressed() -> void:
 	await $Touch.finished
 	$BlurEffect/Control/Panel/M.visible = false
 	$BlurEffect/Control/Panel/MD.visible = true
+	GameManu.is_music_enable = false
+	emit_signal("disable_music")
 
 
 func _on_effect_disable_pressed() -> void:
@@ -71,9 +79,12 @@ func _on_effect_disable_pressed() -> void:
 	$BlurEffect/Control/Panel/ED.visible = false
 	$BlurEffect/Control/Panel/E.visible = true
 	GameManu.is_effect_enable = true
+	emit_signal("enable_effect")
 
 func _on_music_disable_pressed() -> void:
 	$Touch.play()
 	await $Touch.finished
 	$BlurEffect/Control/Panel/MD.visible = false
 	$BlurEffect/Control/Panel/M.visible = true
+	GameManu.is_music_enable = true
+	emit_signal("enable_music")

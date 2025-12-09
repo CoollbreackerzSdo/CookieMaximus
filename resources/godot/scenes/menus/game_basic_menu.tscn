@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cfb1lma5kjwed"]
+[gd_scene load_steps=18 format=3 uid="uid://cfb1lma5kjwed"]
 
 [ext_resource type="Script" uid="uid://da4qnsodr1nrl" path="res://controls/ui/game_basic_menu_control.gd" id="1_hdg35"]
 [ext_resource type="Texture2D" uid="uid://cbfniw4tjnu3e" path="res://resources/assets/ui/containers/mid_box_48x32.png" id="2_vpmci"]
@@ -9,11 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://bcamww8c7g73u" path="res://resources/assets/ui/elements/healt_bard_55x4.png" id="5_8nbkp"]
 [ext_resource type="Texture2D" uid="uid://chn4o1mns7050" path="res://resources/assets/ui/elements/food_bard_55x4.png" id="6_e385b"]
 [ext_resource type="Texture2D" uid="uid://dqiwypibmhk6p" path="res://resources/assets/ui/elements/estres_bard_55x4.png" id="7_q88e6"]
+[ext_resource type="Texture2D" uid="uid://bf8ici1ghjhef" path="res://resources/assets/ui/containers/box_container_64x32.png" id="8_jxis0"]
+[ext_resource type="Texture2D" uid="uid://dcyga6867iv1i" path="res://resources/assets/objects/crash_32x32.png" id="9_cyfew"]
 [ext_resource type="Script" uid="uid://cstdvxqah70b3" path="res://states/elements/key_input_state.gd" id="10_q88e6"]
 [ext_resource type="AudioStream" uid="uid://u2rlnm63qhpi" path="res://resources/assets/audio/efectos/menu_ui.mp3" id="11_soxhf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8nbkp"]
 texture = ExtResource("4_471ej")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cyfew"]
+texture = ExtResource("8_jxis0")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jv0mn"]
 texture = ExtResource("2_vpmci")
@@ -36,8 +41,8 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.15300001
-offset_bottom = -0.080005646
+anchor_bottom = 0.35300002
+offset_bottom = -0.08000183
 grow_horizontal = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -57,14 +62,15 @@ stretch_mode = 5
 
 [node name="Info" type="Panel" parent="Base/Margin/Container"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = -1
+anchor_left = 0.82100004
 anchor_right = 1.0
-offset_left = -112.0
-offset_top = -7.0
-offset_bottom = 41.0
+anchor_bottom = 0.25300002
+offset_left = -0.020019531
+offset_right = 1.0
+offset_bottom = 29.631
 grow_horizontal = 0
-pivot_offset = Vector2(112, 7)
+pivot_offset = Vector2(112, 0.027999878)
 theme_override_styles/panel = SubResource("StyleBoxTexture_8nbkp")
 
 [node name="Healt" type="TextureProgressBar" parent="Base/Margin/Container/Info"]
@@ -106,6 +112,40 @@ offset_top = -0.016002655
 offset_right = 0.03199768
 value = 50.0
 texture_progress = ExtResource("7_q88e6")
+
+[node name="Trash" type="Panel" parent="Base/Margin/Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.89500004
+anchor_top = 0.55600005
+anchor_right = 1.0
+anchor_bottom = 0.82900006
+offset_left = 0.099975586
+offset_top = -0.052009583
+offset_right = -1.0
+offset_bottom = 0.006996155
+grow_horizontal = 0
+pivot_offset = Vector2(64, 0)
+theme_override_styles/panel = SubResource("StyleBoxTexture_cyfew")
+
+[node name="Sprite2D" type="Sprite2D" parent="Base/Margin/Container/Trash"]
+position = Vector2(15, 16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_cyfew")
+
+[node name="TrahCount" type="Label" parent="Base/Margin/Container/Trash"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.328
+anchor_top = 0.125
+anchor_right = 0.93700004
+anchor_bottom = 0.84400004
+offset_left = 0.00799942
+offset_right = 0.03199768
+offset_bottom = -0.0080013275
+text = "1/5"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Base"]
 layout_mode = 1

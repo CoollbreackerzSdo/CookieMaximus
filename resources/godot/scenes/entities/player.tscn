@@ -1,8 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bx7oj8c8wrt21"]
+[gd_scene load_steps=33 format=3 uid="uid://bx7oj8c8wrt21"]
 
 [ext_resource type="Script" uid="uid://rwkk3rtqcmnj" path="res://controls/entities/player_control.gd" id="1_cc4nn"]
 [ext_resource type="Texture2D" uid="uid://dimjwlf8lffxv" path="res://resources/assets/entities/player_tilemap_64x16.png" id="1_o6e2x"]
 [ext_resource type="AudioStream" uid="uid://c71ipybqh5f62" path="res://resources/assets/audio/efectos/pasos-suaves.mp3" id="3_470yq"]
+[ext_resource type="AudioStream" uid="uid://ct71wtpfdw2ve" path="res://resources/assets/audio/efectos/ñom.mp3" id="4_im7uo"]
+[ext_resource type="AudioStream" uid="uid://bcyyhdxggwoy" path="res://resources/assets/audio/efectos/damage.mp3" id="5_tldes"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_470yq"]
 atlas = ExtResource("1_o6e2x")
@@ -274,6 +276,8 @@ shape = SubResource("RectangleShape2D_cc4nn")
 
 [node name="Steps" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_470yq")
+volume_db = -8.0
+pitch_scale = 2.0
 attenuation = 1.1892065
 bus = &"Sfx"
 area_mask = 3
@@ -284,6 +288,15 @@ autostart = true
 
 [node name="Hungry" type="Timer" parent="."]
 autostart = true
+
+[node name="ñom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_im7uo")
+volume_db = -9.0
+pitch_scale = 2.0
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tldes")
+volume_db = -10.0
 
 [connection signal="timeout" from="Stress" to="." method="_on_stress_timeout"]
 [connection signal="timeout" from="Hungry" to="." method="_on_hungry_timeout"]

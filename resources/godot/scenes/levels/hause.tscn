@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c31rbgkvq0f2y"]
+[gd_scene load_steps=36 format=4 uid="uid://c31rbgkvq0f2y"]
 
 [ext_resource type="Script" uid="uid://cxiira0d3uo3j" path="res://controls/managers/hause_manager.gd" id="1_sexe6"]
 [ext_resource type="Texture2D" uid="uid://c6rn1y1unwhnx" path="res://resources/assets/materials/shaders/light.png" id="2_pblqg"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://b57tpapdo5mma" path="res://resources/godot/elements/tools/chras_old.tscn" id="9_gaqc7"]
 [ext_resource type="PackedScene" uid="uid://credqfqco74gm" path="res://resources/godot/scenes/entities/cookie_monsters.tscn" id="11_nicko"]
 [ext_resource type="PackedScene" uid="uid://xw7tdfwfxhqi" path="res://resources/godot/elements/objects/point_light_2d_3.tscn" id="12_exlm3"]
-[ext_resource type="PackedScene" uid="uid://w3dd6f2rbh5y" path="res://resources/godot/elements/tools/char_old_cursor.tscn" id="16_sndj3"]
 [ext_resource type="PackedScene" uid="uid://77p6my003eoi" path="res://resources/godot/scenes/menus/dead_menu.tscn" id="17_f20do"]
 [ext_resource type="PackedScene" uid="uid://cjosmet2w4phd" path="res://resources/godot/elements/food/food.tscn" id="19_ftyef"]
 [ext_resource type="Texture2D" uid="uid://bs0eey3u01o2e" path="res://resources/assets/food/05_apple_pie.png" id="20_0icwa"]
@@ -26,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://ckd1u7nsvb8j3" path="res://resources/assets/food/13_bacon.png" id="23_y41nf"]
 [ext_resource type="Texture2D" uid="uid://dst18ftc1xhsp" path="res://resources/assets/food/101_waffle.png" id="24_f20do"]
 [ext_resource type="Texture2D" uid="uid://bn246xkichfe1" path="res://resources/assets/food/18_burrito.png" id="25_hul6l"]
+[ext_resource type="AudioStream" uid="uid://c3t6typh5b4rj" path="res://resources/assets/audio/ambient/ambient-nig.mp3" id="26_f20do"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sndj3"]
 texture = ExtResource("4_gaqc7")
@@ -361,13 +361,24 @@ size = Vector2(246, 264)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y41nf"]
 size = Vector2(353, 161)
 
+[sub_resource type="GDScript" id="GDScript_f20do"]
+script/source = "extends AudioStreamPlayer2D
+
+
+func _on_pause_menu_disable_music() -> void:
+	stop()
+
+
+func _on_pause_menu_enable_music() -> void:
+	play()
+"
+
 [node name="Hause" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_sexe6")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.05356484, 0.028237948, 0, 1)
+color = Color(0.03767818, 0.01822963, 0, 1)
 
 [node name="Tilemap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -396,51 +407,51 @@ z_index = 1
 position = Vector2(-32, 468)
 
 [node name="Pincipius" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(80, 136)
+position = Vector2(80, 143)
 tool_requeriment_levet = 1
 
 [node name="Caril1" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(176, 424)
+position = Vector2(176, 432)
 tool_requeriment_levet = 2
 
 [node name="Caril2" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(432, 424)
+position = Vector2(432, 432)
 tool_requeriment_levet = 2
 
 [node name="Caril3" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(-304, 424)
+position = Vector2(-303, 431)
 tool_requeriment_levet = 3
 
 [node name="Caril4" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(-560, 424)
+position = Vector2(-560, 431)
 tool_requeriment_levet = 3
 
 [node name="Caril5" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(816, 648)
+position = Vector2(816, 656)
 tool_requeriment_levet = 5
 
 [node name="Caril6" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(1136, -56)
+position = Vector2(1136, -48)
 tool_requeriment_levet = 3
 
 [node name="Caril7" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(1456, -56)
+position = Vector2(1456, -47)
 tool_requeriment_levet = 3
 
 [node name="ExitCarilSO" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(432, 776)
-tool_requeriment_levet = 10
+position = Vector2(432, 784)
+tool_requeriment_levet = 15
 
 [node name="Caril9" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(-560, 232)
+position = Vector2(-560, 239)
 tool_requeriment_levet = 5
 
 [node name="ExitCarilEO" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(-560, 866)
-tool_requeriment_levet = 10
+position = Vector2(-560, 842)
+tool_requeriment_levet = 15
 
-[node name="Caril10" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
-position = Vector2(-336, -312)
+[node name="Top" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
+position = Vector2(-336, -305)
 tool_requeriment_levet = 5
 
 [node name="Cuadros" type="Node2D" parent="Tilemap"]
@@ -519,6 +530,8 @@ motion_mode = 1
 speed = 250.0
 hungry_increase = 10
 stress_increase = 4
+hungry_damage = 4
+stress_damage = 10
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
 position = Vector2(-1, 3)
@@ -548,11 +561,6 @@ speed = 120.0
 damage = 10
 damage_ticks = 1.0
 tps = [NodePath("../TP POINS/Marker2D"), NodePath("../TP POINS/Marker2D4"), NodePath("../TP POINS/Marker2D3"), NodePath("../TP POINS/Marker2D5")]
-
-[node name="CharOldCursor" parent="." instance=ExtResource("16_sndj3")]
-light_mask = 128
-visibility_layer = 64
-z_index = 2
 
 [node name="Comida" type="Node2D" parent="."]
 
@@ -631,28 +639,12 @@ collision_mask = 2
 position = Vector2(-944.5, 995.5)
 shape = SubResource("RectangleShape2D_y41nf")
 
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Pincipius" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Pincipius" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril1" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril1" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril2" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril2" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril3" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril3" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril4" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril4" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril5" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril5" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril6" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril6" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril7" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril7" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/ExitCarilSO" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/ExitCarilSO" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/Caril9" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/Caril9" to="." method="disable_tools"]
-[connection signal="mause_entered" from="Tilemap/Doors_Dowm/ExitCarilEO" to="." method="enable_tools"]
-[connection signal="mause_exited" from="Tilemap/Doors_Dowm/ExitCarilEO" to="." method="disable_tools"]
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_f20do")
+volume_db = 8.0
+autoplay = true
+script = SubResource("GDScript_f20do")
+
 [connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld" to="." method="_on_crash_old_chras_optain_signal"]
 [connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld2" to="." method="_on_crash_old_chras_optain_signal"]
 [connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld3" to="." method="_on_crash_old_chras_optain_signal"]
@@ -661,6 +653,8 @@ shape = SubResource("RectangleShape2D_y41nf")
 [connection signal="dead_signal" from="Player" to="." method="_on_player_dead_signal"]
 [connection signal="pause_signal" from="GameBasicMenu" to="." method="pause_signal"]
 [connection signal="continue_signal" from="PauseMenu" to="." method="continue_signal"]
+[connection signal="disable_music" from="PauseMenu" to="Music" method="_on_pause_menu_disable_music"]
+[connection signal="enable_music" from="PauseMenu" to="Music" method="_on_pause_menu_enable_music"]
 [connection signal="go_to_signal" from="PauseMenu" to="." method="go_to_signal"]
 [connection signal="restart_signal" from="PauseMenu" to="." method="restart_signal"]
 [connection signal="go_to_signal" from="Dead Menu" to="." method="go_to_signal"]

@@ -30,6 +30,8 @@ func  _agentSearch() -> void:
 
 func _on_collition_char_body_entered(body: Node2D) -> void:
 	if body is PlayerControl:
+		if GameManu.is_effect_enable:
+			$Damage.play()
 		emit_signal("char_collition",damage)
 		$DamageTimer.start()
 
@@ -66,7 +68,13 @@ func animated_move(axis:Vector2) -> void:
 
 
 func _on_damage_timer_timeout() -> void:
+	if !is_active:
+		$DamageTimer.stop()
+		return
+	if GameManu.is_effect_enable:
+			$Damage.play()
 	emit_signal("char_collition",damage)
+	await $Damage.finished
 
 
 func _on_collition_char_body_exited(body: Node2D) -> void:

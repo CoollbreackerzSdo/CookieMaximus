@@ -8,6 +8,8 @@ signal dead_signal
 @export var steps_effects: AudioStream
 @export var hungry_increase: int
 @export var stress_increase: int
+@export var hungry_damage: int
+@export var stress_damage: int
 var crash_old_enable: bool = false
 var crash_old_level: int = 0
 var is_pause: bool = false
@@ -36,7 +38,8 @@ func get_move() -> Vector2:
 func animated_move(axis:Vector2) -> void:
 	if axis == Vector2.ZERO:
 		return
-	$Steps.play()
+	if GameManu.is_effect_enable:
+		$Steps.play()
 	if axis.y < 0 && axis.x > 0:
 		animations.play("up_rigth")
 		await $Steps.finished
@@ -88,22 +91,29 @@ func update_status() -> void:
 	if is_secure_zone: return
 	
 	if player_detail.stress >= 100:
-		player_detail.healt -= 10
+		player_detail.healt -= stress_damage
 		player_detail.stress = 0
 	if player_detail.hungry >= 100:
-		player_detail.healt -=5
+		player_detail.healt -=hungry_damage
 		player_detail.hungry = 0
 		
 func _on_enemy_char_collition(damage: int) -> void:
+	if GameManu.is_effect_enable:
+		$Damage.play()
+	await $Damage.finished
 	player_detail.healt -= damage
 
 func add_tool_level(value: int):
+	player_detail.trash_count += 1
 	crash_old_level += value
 
 
 func _on_area_2d_2_collition_body(value: int) -> void:
+	if GameManu.is_effect_enable:
+		$"ñom".play()
 	player_detail.hungry -= value * 2
 	player_detail.healt += value
+	await $"ñom".finished
 
 
 func _on_hungry_timeout() -> void:
@@ -120,11 +130,3 @@ func _on_stress_timeout() -> void:
 	if player_detail.stress >= 100:
 		player_detail.stress = 0
 		player_detail.healt -= 20
-
-
-func _on_area_2d_4_collition_body(value: int) -> void:
-	pass # Replace with function body.
-
-
-func _on_area_2d_6_collition_body(value: int) -> void:
-	pass # Replace with function body.

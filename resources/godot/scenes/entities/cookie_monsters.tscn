@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://credqfqco74gm"]
+[gd_scene load_steps=6 format=3 uid="uid://credqfqco74gm"]
 
 [ext_resource type="SpriteFrames" uid="uid://cdkad5mgy1cke" path="res://resources/godot/animations/enemy.tres" id="1_t0rnh"]
 [ext_resource type="Script" uid="uid://c6y1mcdv1c7s" path="res://controls/entities/cookie_monsters_control.gd" id="1_wc0hb"]
+[ext_resource type="AudioStream" uid="uid://dy42yi15818yp" path="res://resources/assets/audio/efectos/enemi_damage.mp3" id="3_wfm4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wc0hb"]
 size = Vector2(29, 30)
@@ -48,6 +49,11 @@ navigation_layers = 2
 
 [node name="AgentTimer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wfm4n")
+volume_db = -10.0
+pitch_scale = 3.0
 
 [connection signal="body_entered" from="CollitionChar" to="." method="_on_collition_char_body_entered"]
 [connection signal="body_exited" from="CollitionChar" to="." method="_on_collition_char_body_exited"]

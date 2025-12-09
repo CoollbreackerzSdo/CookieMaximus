@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://77p6my003eoi"]
+[gd_scene load_steps=27 format=3 uid="uid://77p6my003eoi"]
 
+[ext_resource type="Shader" uid="uid://d2xr0oe2cjp42" path="res://resources/godot/materials/shaders/blur_shader.gdshader" id="1_1wh0v"]
 [ext_resource type="Texture2D" uid="uid://dimpqmvonantr" path="res://resources/assets/ui/containers/flag_box_container_160x48.png" id="1_a8fce"]
 [ext_resource type="Texture2D" uid="uid://bqv6o6vyl6nxd" path="res://resources/assets/ui/containers/vandal_big_hero_96x32.png" id="2_bxtjb"]
 [ext_resource type="Texture2D" uid="uid://bieevwve58pj6" path="res://resources/assets/ui/elements/buttoms/resert_buttom_16x16.png" id="3_sqfbv"]
@@ -34,20 +35,20 @@ var game_time: String = \"\"
 func _ready() -> void:
 	visible = false
 	if !GameManu.is_music_enable:
-		$Control/Panel3/M.visible = false
-		$Control/Panel3/MD.visible = true
+		$ColorRect/Control/Panel3/M.visible = false
+		$ColorRect/Control/Panel3/MD.visible = true
 	else:
-		$Control/Panel3/MD.visible = false
-		$Control/Panel3/M.visible = true
+		$ColorRect/Control/Panel3/MD.visible = false
+		$ColorRect/Control/Panel3/M.visible = true
 	if !GameManu.is_effect_enable:
-		$Control/Panel3/E.visible = false
-		$Control/Panel3/ED.visible = true
+		$ColorRect/Control/Panel3/E.visible = false
+		$ColorRect/Control/Panel3/ED.visible = true
 	else:
-		$Control/Panel3/ED.visible = false
-		$Control/Panel3/E.visible = true
+		$ColorRect/Control/Panel3/ED.visible = false
+		$ColorRect/Control/Panel3/ED.visible = true
 
 func _process(_delta: float) -> void:
-	$Control/TIme.text = game_time
+	$ColorRect/Control/TIme.text = game_time
 
 func _on_r_pressed() -> void:
 	if GameManu.is_effect_enable:
@@ -61,15 +62,15 @@ func _on_r_pressed() -> void:
 func _on_md_pressed() -> void:
 	$Touch.play()
 	await $Touch.finished
-	$Control/Panel3/MD.visible = false
-	$Control/Panel3/M.visible = true
+	$ColorRect/Control/Panel3/MD.visible = false
+	$ColorRect/Control/Panel3/M.visible = true
 
 
 func _on_ed_pressed() -> void:
 	$Touch.play()
 	await $Touch.finished
-	$Control/Panel3/ED.visible = false
-	$Control/Panel3/E.visible = true
+	$ColorRect/Control/Panel3/ED.visible = false
+	$ColorRect/Control/Panel3/E.visible = true
 	GameManu.is_effect_enable = true
 
 
@@ -85,17 +86,21 @@ func _on_h_pressed() -> void:
 func _on_e_pressed() -> void:
 	$Touch.play()
 	await $Touch.finished
-	$Control/Panel3/E.visible = false
-	$Control/Panel3/ED.visible = true
+	$ColorRect/Control/Panel3/E.visible = false
+	$ColorRect/Control/Panel3/ED.visible = true
 	GameManu.is_effect_enable = false
 
 
 func _on_m_pressed() -> void:
 	$Touch.play()
 	await $Touch.finished
-	$Control/Panel3/M.visible = false
-	$Control/Panel3/MD.visible = true
+	$ColorRect/Control/Panel3/M.visible = false
+	$ColorRect/Control/Panel3/MD.visible = true
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wh0v"]
+shader = ExtResource("1_1wh0v")
+shader_parameter/lod_blur = 2.000000095
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ogosr"]
 texture = ExtResource("2_bxtjb")
@@ -106,15 +111,23 @@ texture = ExtResource("1_a8fce")
 [node name="Dead Menu" type="CanvasLayer"]
 script = SubResource("GDScript_tyd2c")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1wh0v")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel2" type="Panel" parent="Control"]
+[node name="Control" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="ColorRect/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -128,7 +141,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(48, 16)
 theme_override_styles/panel = SubResource("StyleBoxTexture_ogosr")
 
-[node name="Label" type="Label" parent="Control/Panel2"]
+[node name="Label" type="Label" parent="ColorRect/Control/Panel2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -144,7 +157,7 @@ grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 text = "Game Over"
 
-[node name="Panel3" type="Panel" parent="Control"]
+[node name="Panel3" type="Panel" parent="ColorRect/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -160,7 +173,7 @@ grow_vertical = 2
 pivot_offset = Vector2(80, 24)
 theme_override_styles/panel = SubResource("StyleBoxTexture_yi28b")
 
-[node name="R" type="TextureButton" parent="Control/Panel3"]
+[node name="R" type="TextureButton" parent="ColorRect/Control/Panel3"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.14400001
@@ -178,7 +191,7 @@ texture_normal = ExtResource("3_sqfbv")
 texture_pressed = ExtResource("4_wo640")
 texture_hover = ExtResource("5_1wh0v")
 
-[node name="H" type="TextureButton" parent="Control/Panel3"]
+[node name="H" type="TextureButton" parent="ColorRect/Control/Panel3"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75000006
@@ -194,7 +207,7 @@ texture_normal = ExtResource("6_mwrip")
 texture_pressed = ExtResource("7_w61nm")
 texture_hover = ExtResource("8_efd15")
 
-[node name="E" type="TextureButton" parent="Control/Panel3"]
+[node name="E" type="TextureButton" parent="ColorRect/Control/Panel3"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 16.0
@@ -205,7 +218,7 @@ texture_normal = ExtResource("9_xddvj")
 texture_pressed = ExtResource("10_5rs7u")
 texture_hover = ExtResource("11_sc4k0")
 
-[node name="M" type="TextureButton" parent="Control/Panel3"]
+[node name="M" type="TextureButton" parent="ColorRect/Control/Panel3"]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 16.0
@@ -216,7 +229,7 @@ texture_normal = ExtResource("12_2j4n8")
 texture_pressed = ExtResource("13_hef7g")
 texture_hover = ExtResource("14_n6krc")
 
-[node name="ED" type="TextureButton" parent="Control/Panel3"]
+[node name="ED" type="TextureButton" parent="ColorRect/Control/Panel3"]
 visible = false
 layout_mode = 0
 offset_left = 72.0
@@ -228,7 +241,7 @@ texture_normal = ExtResource("15_fjuve")
 texture_pressed = ExtResource("16_d5wtn")
 texture_hover = ExtResource("17_x0xhh")
 
-[node name="MD" type="TextureButton" parent="Control/Panel3"]
+[node name="MD" type="TextureButton" parent="ColorRect/Control/Panel3"]
 visible = false
 layout_mode = 0
 offset_left = 96.0
@@ -240,7 +253,7 @@ texture_normal = ExtResource("18_gymkr")
 texture_pressed = ExtResource("19_id8yx")
 texture_hover = ExtResource("20_qjt0r")
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="ColorRect/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -257,7 +270,7 @@ text = "Game Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TIme" type="Label" parent="Control"]
+[node name="TIme" type="Label" parent="ColorRect/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -277,9 +290,9 @@ vertical_alignment = 1
 [node name="Touch" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_wo640")
 
-[connection signal="pressed" from="Control/Panel3/R" to="." method="_on_r_pressed"]
-[connection signal="pressed" from="Control/Panel3/H" to="." method="_on_h_pressed"]
-[connection signal="pressed" from="Control/Panel3/E" to="." method="_on_e_pressed"]
-[connection signal="pressed" from="Control/Panel3/M" to="." method="_on_m_pressed"]
-[connection signal="pressed" from="Control/Panel3/ED" to="." method="_on_ed_pressed"]
-[connection signal="pressed" from="Control/Panel3/MD" to="." method="_on_md_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Panel3/R" to="." method="_on_r_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Panel3/H" to="." method="_on_h_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Panel3/E" to="." method="_on_e_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Panel3/M" to="." method="_on_m_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Panel3/ED" to="." method="_on_ed_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Panel3/MD" to="." method="_on_md_pressed"]
