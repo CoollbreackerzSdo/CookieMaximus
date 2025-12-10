@@ -1,11 +1,100 @@
-[gd_scene format=3 uid="uid://bc18odu1po2pj"]
+[gd_scene load_steps=11 format=3 uid="uid://bc18odu1po2pj"]
+
+[ext_resource type="Texture2D" uid="uid://bpq3tgdxaghcy" path="res://resources/assets/scenes/wing.png" id="1_7r5dl"]
+[ext_resource type="PackedScene" uid="uid://b4g3i1dmc0yjd" path="res://resources/godot/scenes/menus/transition.tscn" id="2_21bdd"]
+[ext_resource type="Texture2D" uid="uid://bieevwve58pj6" path="res://resources/assets/ui/elements/buttoms/resert_buttom_16x16.png" id="3_s3fxh"]
+[ext_resource type="Texture2D" uid="uid://c7veqeidsod4r" path="res://resources/assets/ui/elements/buttoms/resert_buttom_click_16x16.png" id="4_uhbmg"]
+[ext_resource type="Texture2D" uid="uid://c6532pw3smski" path="res://resources/assets/ui/elements/buttoms/resert_buttom_hover_16x16.png" id="5_2qau5"]
+[ext_resource type="Texture2D" uid="uid://cgeqnyyx0lkp6" path="res://resources/assets/ui/elements/buttoms/home_buttom_16x16.png" id="6_be0ou"]
+[ext_resource type="Texture2D" uid="uid://dx1a4dnsmb7ik" path="res://resources/assets/ui/elements/buttoms/home_buttom_active_16x16.png" id="7_keh3g"]
+[ext_resource type="Texture2D" uid="uid://byg4rglt0gddg" path="res://resources/assets/ui/elements/buttoms/home_buttom_hover_16x16.png" id="8_akah2"]
+
+[sub_resource type="GDScript" id="GDScript_7r5dl"]
+script/source = "extends CanvasLayer
+
+class_name WindMenu
+
+signal reset_signal
+signal home_siganl
+
+func _enter_tree() -> void:
+	$Transition/Panel.visible = false
+
+func play_animation() -> void:
+	$Transition.play()
+	$Transition/Panel.visible = true
+
+
+func _on_r_pressed() -> void:
+	emit_signal(\"reset_signal\")
+
+
+func _on_h_button_down() -> void:
+	emit_signal(\"home_siganl\")
+"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21bdd"]
+texture = ExtResource("1_7r5dl")
 
 [node name="WindMenu" type="CanvasLayer"]
+script = SubResource("GDScript_7r5dl")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="Transition" parent="." instance=ExtResource("2_21bdd")]
+
+[node name="Panel" type="Panel" parent="Transition"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_21bdd")
+
+[node name="MarginContainer" type="MarginContainer" parent="Transition/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="Transition/Panel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="R" type="TextureButton" parent="Transition/Panel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.053000003
+anchor_bottom = 0.1
+offset_right = -15.800001
+offset_bottom = -16.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("3_s3fxh")
+texture_pressed = ExtResource("4_uhbmg")
+texture_hover = ExtResource("5_2qau5")
+
+[node name="H" type="TextureButton" parent="Transition/Panel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_right = 0.123
+anchor_bottom = 0.1
+offset_left = 7.799999
+offset_top = 8.0
+offset_right = -8.800034
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(8, 8)
+texture_normal = ExtResource("6_be0ou")
+texture_pressed = ExtResource("7_keh3g")
+texture_hover = ExtResource("8_akah2")
+
+[connection signal="pressed" from="Transition/Panel/MarginContainer/Control/R" to="." method="_on_r_pressed"]
+[connection signal="button_down" from="Transition/Panel/MarginContainer/Control/H" to="." method="_on_h_button_down"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://c31rbgkvq0f2y"]
+[gd_scene load_steps=39 format=4 uid="uid://c31rbgkvq0f2y"]
 
 [ext_resource type="Script" uid="uid://cxiira0d3uo3j" path="res://controls/managers/hause_manager.gd" id="1_sexe6"]
 [ext_resource type="Texture2D" uid="uid://c6rn1y1unwhnx" path="res://resources/assets/materials/shaders/light.png" id="2_pblqg"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://dst18ftc1xhsp" path="res://resources/assets/food/101_waffle.png" id="24_f20do"]
 [ext_resource type="Texture2D" uid="uid://bn246xkichfe1" path="res://resources/assets/food/18_burrito.png" id="25_hul6l"]
 [ext_resource type="AudioStream" uid="uid://c3t6typh5b4rj" path="res://resources/assets/audio/ambient/ambient-nig.mp3" id="26_f20do"]
+[ext_resource type="PackedScene" uid="uid://bc18odu1po2pj" path="res://resources/godot/scenes/menus/wind_menu.tscn" id="27_hul6l"]
+[ext_resource type="AudioStream" uid="uid://b2bp45dly214i" path="res://resources/assets/audio/music/poped.mp3" id="28_s7e07"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sndj3"]
 texture = ExtResource("4_gaqc7")
@@ -373,6 +375,9 @@ func _on_pause_menu_enable_music() -> void:
 	play()
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hul6l"]
+size = Vector2(378, 498)
+
 [node name="Hause" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_sexe6")
@@ -440,7 +445,7 @@ tool_requeriment_levet = 3
 
 [node name="ExitCarilSO" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
 position = Vector2(432, 784)
-tool_requeriment_levet = 15
+tool_requeriment_levet = 20
 
 [node name="Caril9" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
 position = Vector2(-560, 239)
@@ -448,11 +453,11 @@ tool_requeriment_levet = 5
 
 [node name="ExitCarilEO" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
 position = Vector2(-560, 842)
-tool_requeriment_levet = 15
+tool_requeriment_levet = 20
 
 [node name="Top" parent="Tilemap/Doors_Dowm" instance=ExtResource("6_75aib")]
 position = Vector2(-336, -305)
-tool_requeriment_levet = 5
+tool_requeriment_levet = 10
 
 [node name="Cuadros" type="Node2D" parent="Tilemap"]
 z_index = 1
@@ -464,23 +469,23 @@ position = Vector2(43.768066, 299.31644)
 [node name="Tools" type="Node2D" parent="Tilemap"]
 position = Vector2(-32, 469)
 
-[node name="CrashOld" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
+[node name="Tutorial" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
 position = Vector2(-7, 99)
-level = 1
+level = 4
 
-[node name="CrashOld2" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
+[node name="Scool" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
 position = Vector2(-932, -105)
-level = 20
+level = 4
 
-[node name="CrashOld3" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
+[node name="Tops" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
 position = Vector2(893, 610)
-level = 2
+level = 4
 
-[node name="CrashOld4" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
+[node name="Lips" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
 position = Vector2(454, -144)
-level = 2
+level = 4
 
-[node name="CrashOld5" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
+[node name="Tetanos" parent="Tilemap/Tools" instance=ExtResource("9_gaqc7")]
 position = Vector2(1378, 373)
 level = 4
 
@@ -645,11 +650,25 @@ volume_db = 8.0
 autoplay = true
 script = SubResource("GDScript_f20do")
 
-[connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld" to="." method="_on_crash_old_chras_optain_signal"]
-[connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld2" to="." method="_on_crash_old_chras_optain_signal"]
-[connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld3" to="." method="_on_crash_old_chras_optain_signal"]
-[connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld4" to="." method="_on_crash_old_chras_optain_signal"]
-[connection signal="chras_optain_signal" from="Tilemap/Tools/CrashOld5" to="." method="_on_crash_old_chras_optain_signal"]
+[node name="WindMenu" parent="." instance=ExtResource("27_hul6l")]
+visible = false
+
+[node name="LimitZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Zone" type="CollisionShape2D" parent="LimitZone"]
+position = Vector2(-941, 1318)
+shape = SubResource("RectangleShape2D_hul6l")
+
+[node name="WindMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_s7e07")
+
+[connection signal="chras_optain_signal" from="Tilemap/Tools/Tutorial" to="." method="_on_crash_old_chras_optain_signal"]
+[connection signal="chras_optain_signal" from="Tilemap/Tools/Scool" to="." method="_on_crash_old_chras_optain_signal"]
+[connection signal="chras_optain_signal" from="Tilemap/Tools/Tops" to="." method="_on_crash_old_chras_optain_signal"]
+[connection signal="chras_optain_signal" from="Tilemap/Tools/Lips" to="." method="_on_crash_old_chras_optain_signal"]
+[connection signal="chras_optain_signal" from="Tilemap/Tools/Tetanos" to="." method="_on_crash_old_chras_optain_signal"]
 [connection signal="dead_signal" from="Player" to="." method="_on_player_dead_signal"]
 [connection signal="pause_signal" from="GameBasicMenu" to="." method="pause_signal"]
 [connection signal="continue_signal" from="PauseMenu" to="." method="continue_signal"]
@@ -672,5 +691,8 @@ script = SubResource("GDScript_f20do")
 [connection signal="body_entered" from="Secure Zones/Zone_2" to="." method="_on_zone_1_body_entered"]
 [connection signal="body_exited" from="Secure Zones/Zone_2" to="." method="_on_zone_1_body_exited"]
 [connection signal="body_entered" from="Wining" to="." method="_on_wining_body_entered"]
+[connection signal="home_siganl" from="WindMenu" to="." method="go_to_signal"]
+[connection signal="reset_signal" from="WindMenu" to="." method="restart_signal"]
+[connection signal="body_entered" from="LimitZone" to="." method="_on_limit_zone_body_entered"]
 
 [editable path="Player"]

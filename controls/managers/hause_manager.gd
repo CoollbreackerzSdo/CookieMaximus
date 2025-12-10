@@ -61,11 +61,22 @@ func _on_zone_1_body_exited(body: Node2D) -> void:
 
 func _on_wining_body_entered(body: Node2D) -> void:
 	if body is PlayerControl:
-		pass
-	pass
+		$Music.stop()
+		$Enemy.is_active = false
+		player.pause_event()
+		$GameBasicMenu.visible = false
+		await $WindMenu.play_animation()
 
 
 func _on_player_dead_signal() -> void:
 	$Enemy.is_active = false
 	$"Dead Menu".game_time = str($GameBasicMenu.current_m) + "m:" +  str($GameBasicMenu.current_s) + "s"
 	$"Dead Menu".visible = true
+
+
+func _on_limit_zone_body_entered(body: Node2D) -> void:
+	if body is PlayerControl:
+		$Music.stop()
+		$WindMusic.play()
+		$Player/PointLight2D.texture_scale = 0.5
+		$Player/PointLight2D.energy = 1.5
